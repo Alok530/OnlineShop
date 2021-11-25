@@ -1,0 +1,111 @@
+const express = require('express')
+const router = express.Router();
+var jwt = require('jsonwebtoken');
+const bcrypt = require('bcrypt');
+
+const dotenv = require('dotenv');
+dotenv.config({path:'../dotenv'});
+const jwt_secretekey = process.env.SECRETEKEY; 
+
+// const jwt_secretekey = 'iamagoodboyiamsecondyearstudentatiiitkalyani.ac.inwestbengal'; 
+const fetchuser = require('../middleware/fetchuser');
+
+const User = require('../models/User');
+const feedback = require('../models/Feedback');
+
+// Router 1
+router.post('/login', async (req, res) => {
+    let success = true;
+    try {
+        const fetchUser = await User.findOne({ mobile: req.body.mobile });
+        if (!fetchUser) {
+            return res.status(400).json({ "success": !success, "message": 'You are not registered' });
+        }
+
+        console.log(fetchUser);
+        const result = await bcrypt.compare(req.body.password,fetchUser.password);
+
+        if (result) {        
+            const data = {
+                user:{
+                    id:fetchUser.id
+                }
+            }
+            const jwtoken = jwt.sign(data,jwt_secretekey);    
+
+            console.log(`${req.body.mobile} is login successfully`);
+            res.status(200).json({ "success": success, "message": `You are login successfully`,jwtoken });
+        } else {
+            console.log('invalid password');
+            res.status(400).send({ "success": !success, "message": 'Invalid login credentials' });
+        }
+    } catch (error) {
+        res.status(400).send({ "success": !success, "message": 'Some internal error hai' });
+    }
+})
+
+// Router 2
+router.post('/regester', async (req, res) => {
+    let success = true;
+    try {
+        let findUser = await User.findOne({ mobile: req.body.mobile });
+        if (findUser) {
+            return res.status(400).json({ "success": !success, "message": 'Sorry this mobile number is already registered' });
+        }
+
+        const salt = await bcrypt.genSalt(10);
+        const hashPassword = await bcrypt.hash(req.body.password,salt);
+
+        const user = await User.create({
+            name: req.body.name,
+            mobile: req.body.mobile,
+            password: hashPassword,
+        })
+        
+        const data = {
+            user:{
+                id:user.id
+            }
+        }
+        const jwtoken = jwt.sign(data,jwt_secretekey);    
+
+        console.log(`${req.body.mobile} register successfully`);
+        res.status(200).json({ "success": success, "message": 'You are registered successfully',jwtoken });
+    } catch (error) {
+        console.log(error);
+        res.status(500).send({ "success": !success, "error": 'Some error occur', "err": error });
+    }
+},
+);
+
+// Router 3 
+router.post('/getuser', fetchuser ,async (req, res) => {                
+    try {
+        let userId = req.userUniqueKey;
+        console.log('userId hai ye',userId);
+        const user = await User.findById(userId).select("-password");            
+        res.status(200).send(user);
+    } catch (error) {
+        console.log(error);
+        res.status(500).send('Some error occur');
+    }
+},
+);
+
+router.post('/feedback', async (req,res) =>{
+    try {
+        const respons = await feedback.create({
+            name:req.body.name,
+            message:req.body.message,
+        });
+        console.log('feedback submitted',respons);
+        if(respons)
+        res.status(200).json({success:true,message:'Thanks for your valuable feedback'});
+    } catch (error) {
+        console.log(error);
+        res.status(400).json({success:false,message:'Your feedback not submited'});
+    }
+})
+
+
+module.exports = router;

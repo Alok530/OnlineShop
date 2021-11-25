@@ -1,0 +1,270 @@
+@media only screen and (max-width: 400px) {
+  .hhh {
+    margin-top: 10px;
+  }
+  .smallAddtoCart p:nth-child(3){
+      display: none;
+  }
+  .smallAddtoCart p{
+      font-weight: normal;
+  }
+}
+
+.contact {
+  /* position: relative; */
+  min-height: 100vh;
+  padding: 50px 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center; /* for align in y-diraction */
+  flex-direction: column;
+}
+.contact .content {
+  max-width: 800px;
+  text-align: center;
+}
+.contact .content p {
+  font-weight: 500;
+  font-size: 16px;
+  color: #fff;
+}
+
+.Home {
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url("./components/about1.jpg");
+  background-size: cover;
+  background-position: center;
+}
+.greeting {
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url("./components/about1.jpg");
+  background-size: cover;
+  background-position: center;
+}
+.Home .content h1 {
+  font-weight: 700;
+  font-size: 70px;
+  color: white;
+}
+.contact .content h3{
+  font-weight: 600;
+  font-size: 25px;
+  color: #fff;
+}
+.contact .content h5{
+  font-weight: 400;
+  font-size: 20px;
+  color: #fff;
+}
+.Home .content h3,h5 {
+  opacity: 0.7;
+}
+
+.regestration {
+  border-radius: 7px;
+  width: 40%;
+  background-color: whitesmoke;
+}
+.regestration span {
+  font-weight: 600;
+  font-size: 20px;
+}
+.regestration input {
+  height: 45px;
+  outline: none;
+  border-radius: 5px;
+  border: 1px solid rgb(66, 66, 66);
+  padding-left: 15px;
+  font-size: 16px;
+  margin-top: 5px;
+}
+.regestration input:focus {
+  border: 2px solid #9b59b6;
+  box-shadow: none;
+}
+.regestration .Title {
+  font-size: 25px;
+  font-weight: 700;
+  position: relative;
+  margin-bottom: 23px;
+}
+.regestration .Title::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -5px;
+  height: 4px;
+  width: 95px;
+  background: linear-gradient(135deg, #71b7e6, #9b59b6);
+}
+.order .Title::before {
+  width: 250px;
+}
+.Reg {
+  background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+    url("./components/reg.jpg");
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.formBtn {
+  background: linear-gradient(135deg, #71b7e6, #9b59b6);
+  width: 30%;
+  font-weight: 700;
+  font-size: 20px;
+  margin-top: 12px;
+  color: white;
+  border-radius: 5px;
+  margin-bottom: 18px;
+}
+.regestration button {
+  background: linear-gradient(135deg, #71b7e6, #9b59b6);
+  width: 100%;
+  font-weight: 700;
+  font-size: 20px;
+  margin-top: 12px;
+  color: white;
+  border-radius: 5px;
+  margin-bottom: 18px;
+}
+.regestration button:hover {
+  color: white;
+  cursor: pointer;
+}
+.links {
+  text-decoration: none;
+  font-weight: 600;
+}
+.Login {
+  width: 25%;
+}
+
+@media only screen and (max-width: 400px) {
+  .regestration {
+    width: 85%;
+    margin-top: 2125px;
+    margin-bottom: 25px;
+  }
+  .Reg {
+    height: 100%;
+    width: 100%;
+    padding-top: 40px;
+    padding-bottom: 45px;
+  }
+  .Home .content h1 {
+    font-size: 45px;
+  }
+  .contact .content h3{
+    font-size: 17px;
+  }
+  .contact .content h5{
+    font-size: 15px;
+  }
+}
+
+/* footer  */
+.footer {
+  background: #000;
+  color: #8a8a8a;
+  font-size: 14px;
+  padding: 60px 0 20px;
+}
+.footerLink samp {
+  text-decoration: none;
+}
+.app-logo img {
+  width: 100px;
+}
+.footer hr {
+  border: none;
+  background: #b5b5b5;
+  height: 1px;
+  margin: 20px 0;
+}
+.copyright {
+  text-align: center;
+  margin-bottom: 0px;
+}
+
+/* error  */
+.alok {
+  background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+    url("./components/reg.jpg");
+  background-size: cover;
+  background-position: center;
+  width: 100%;
+  height: 100%;
+}
+.errorBox {
+  width: 100vw;
+  height: 100vh;
+  /* background-color: gray; */
+  background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+    url("./components/reg.jpg");
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.errorImg {
+  width: 50%;
+  padding: 1rem 1rem;
+  text-align: center;
+  background: whitesmoke;
+}
+.errorImg h1 {
+  font-size: 6rem;
+  font-weight: 800;
+}
+.errorImg h2 {
+  font-size: 1.7rem;
+  font-weight: 600;
+}
+.BTN:focus {
+  outline: none;
+}
+@media only screen and (max-width: 600px) {
+  .errorImg {
+    width: 80%;
+  }
+  .errorImg h1 {
+    font-size: 3rem;
+  }
+  .errorImg h2 {
+    font-size: 1rem;
+  }
+}
+/* for btn  */
+.temp {
+  background: linear-gradient(135deg, #71b7e6, #9b59b6);
+  width: 10rem;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  font-weight: 700;
+  font-size: 20px;
+  margin-top: 12px;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  margin-bottom: 18px;
+}
+.BTN {
+  transition: 0.5s;
+  border-radius: 30px;
+  color: white;
+  background: #ff523b;
+  outline: none;
+  border: none;
+  padding: 6px 25px;
+}
+.BTN:hover {
+  background: #563434;
+  color: white;
+  outline: none;
+}
