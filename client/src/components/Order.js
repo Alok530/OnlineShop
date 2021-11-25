@@ -8,7 +8,7 @@ import Error from './Error';
 import Alert from './Alert';
 import ScrollBtn from './ScrollBtn';
 import ShopContext from '../context/ShopContext';
-const host = "http://localhost:5000/api/placeorder/order";
+const host = "https://ecommerce-reactapp-alok.herokuapp.com/api/placeorder/order";
 
 const Regester = () => {
     const navigate = useNavigate();

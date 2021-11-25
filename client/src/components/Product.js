@@ -3,7 +3,7 @@ import { useContext } from 'react';
 import { useNavigate } from 'react-router';
 import ShopContext from '../context/ShopContext';
 
-const host = "http://localhost:5000";
+const host = "https://ecommerce-reactapp-alok.herokuapp.com";
 
 export default function Product(props) {
     const navigate = useNavigate();

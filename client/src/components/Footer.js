@@ -15,7 +15,7 @@ export default function Footer() {
     const onsubmitfun = async (event) => {
         try {
             event.preventDefault();
-            let url = 'http://localhost:5000/api/user/feedback';
+            let url = 'https://ecommerce-reactapp-alok.herokuapp.com/api/user/feedback';
             const response = await fetch(url, {
                 method: 'POST',
                 headers: {
