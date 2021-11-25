@@ -9,7 +9,7 @@ import Alert from './Alert'
 import ScrollBtn from './ScrollBtn';
 import ShopContext from '../context/ShopContext'   // importing context file 
 
-const host = "http://localhost:5000/api/user/login";
+const host = "https://ecommerce-reactapp-alok.herokuapp.com";
 
 export default function Login() {
     const context = useContext(ShopContext); // for using useContext states and functions 
@@ -28,7 +28,7 @@ export default function Login() {
 
     const onsubmitfun = async (event) => {
         event.preventDefault();
-        let url = `${host}`;
+        let url = `${host}/api/user/login}`;
         const response = await fetch(url, {
             method: 'POST',
             headers: {

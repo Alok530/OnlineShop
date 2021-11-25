@@ -9,7 +9,7 @@ import { useNavigate } from "react-router";
 import { useContext } from "react";
 import ShopContext from "../context/ShopContext";
 import ScrollBtn from './ScrollBtn';
-const host = "http://localhost:5000";
+const host = "https://ecommerce-reactapp-alok.herokuapp.com";
 
 const AddToCart = () => {
     const context = useContext(ShopContext);
