@@ -1,6 +1,5 @@
 const express = require('express')
 const app = express();
-const router = express.Router();
 
 const port = process.env.PORT || 5000;
 
@@ -12,16 +11,18 @@ const connectToMongo = require('./db/connection');
 app.use(express.json());
 
 // Available routes 
-router.get('/',(req,res)=>{
-    res.send('alok hu');
-})
+
 app.use('/api/user',require('./routes/User'));
 app.use('/api/cart',require('./routes/Cart'));
 app.use('/api/placeorder',require('./routes/Order'));
 
 // sterp 3
-if(process.env.NODE_ENV == 'pruduction'){
-    app.use(express.static('client/build'));
+if(process.env.NODE_ENV === "production"){
+    app.use(express.static("client/build"));
+    const path = require('path');
+    app.get('*',(req,res)=>{
+        res.sendFile(path.resolve(__dirname,'client','build','index.html'));
+    })
 }
 
 app.listen(port, () => {
