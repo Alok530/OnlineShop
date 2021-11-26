@@ -2,11 +2,13 @@ import React from 'react'
 import Footer from './Footer'
 import ScrollBtn from './ScrollBtn';
 import { Link } from 'react-router-dom';
+import Navbarfront from './Navbarfront'
 
 const Home = () => {
     return (
         <>
             <ScrollBtn />
+            <Navbarfront/>
             <div className="contact Home">
                 <div className="content">
                     <h1>Fashion Collections</h1>

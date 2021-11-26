@@ -8,6 +8,7 @@ export default function Footer() {
     const [user, setuser] = useState({ name: '', message: '' });
 
     const onchangefun = (event) => {
+        if(event.target.name==='name')
         event.target.value = event.target.value.toUpperCase();
         setuser({ ...user, [event.target.name]: event.target.value })
     }
