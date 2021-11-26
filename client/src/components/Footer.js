@@ -53,8 +53,8 @@ export default function Footer() {
                     <div className="col-md-3 mx-auto text-center mb-2">
                         <h3>FeedBack</h3>
                         <form onSubmit={onsubmitfun}>
-                            <input onChange={onchangefun} autoComplete="off" name="name"  value={user.name} type="text" placeholder="Name" style={{ textAlign: 'center', outline: 'none', marginBottom: '7px', borderRadius: '20px', padding: '2px',border:'none' }} /><br />
-                            <input onChange={onchangefun} autoComplete="off" name="message" value={user.message} type="text" placeholder="Message Me" style={{ textAlign: 'center', outline: 'none', borderRadius: '20px', padding: '2px',border:'none' }} /><br />
+                            <input onChange={onchangefun} required autoComplete="off" name="name"  value={user.name} type="text" placeholder="Name" style={{ textAlign: 'center', outline: 'none', marginBottom: '7px', borderRadius: '20px', padding: '2px',border:'none' }} /><br />
+                            <input onChange={onchangefun} required autoComplete="off" name="message" value={user.message} type="text" placeholder="Message Me" style={{ textAlign: 'center', outline: 'none', borderRadius: '20px', padding: '2px',border:'none' }} /><br />
                             <button type="submit" className="BTN my-2">Submit</button>
                         </form>
                     </div>

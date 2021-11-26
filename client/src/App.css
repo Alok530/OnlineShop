@@ -1,4 +1,4 @@
-@media only screen and (max-width: 400px) {
+@media only screen and (max-width: 700px) {
   .hhh {
     margin-top: 10px;
   }
@@ -144,7 +144,7 @@
   width: 25%;
 }
 
-@media only screen and (max-width: 400px) {
+@media only screen and (max-width: 700px) {
   .regestration {
     width: 85%;
     margin-top: 2125px;
@@ -229,7 +229,7 @@
 .BTN:focus {
   outline: none;
 }
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 700px) {
   .errorImg {
     width: 80%;
   }
