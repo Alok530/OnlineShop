@@ -84,7 +84,7 @@ const Regester = () => {
                             <input onChange={Onchangefun} value={User.password} type="password" className="form-control" minLength="4" maxLength="8"  name="password" id="inputPassword4" placeholder="Enter Your Password" autoComplete="off" required="true" />
                         </div>
                         <div className="col-12">
-                            <button type="submit" name="signup" value="regester" className="btn">Regester</button>
+                            <button type="submit" name="signup" value="regester" className="btn">Register</button>
                         </div>
                     </form>
                     <div class="row">

@@ -79,7 +79,7 @@ export default function Login() {
                             <input onChange={onchangefun} value={User.password} minLength="4" maxLength="8" type="password" className="form-control" name="password" id="inputPassword4" placeholder="Enter Your Password" autoComplete="off" required="true" />
                         </div>
                         <div className="col-12">
-                            <button type="submit" className="btn">Sing In</button>
+                            <button type="submit" className="btn">Sign In</button>
                         </div>
                     </form>
                     <div class="row">
