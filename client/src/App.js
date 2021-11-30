@@ -26,6 +26,7 @@ const App = () => {
           <Route path='/payment' element={<Payment />} />
           <Route path='/order' element={<Order />} />
           <Route path='/afterOrder' element={<PlacedOrder />} />
+          <Route path='*' element={<Error first={'404-PAGE NOT FOUND'} second={'Page not found error you are trying to access page which is not exist.'} />} />
         </Routes>
       </ShopStateContext>
     </>
