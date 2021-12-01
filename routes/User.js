@@ -111,19 +111,16 @@ router.put('/updateAccount', fetchuser, async (req, res) => {
     try {
 
         const { name, mobile, gender, password } = req.body;
-
+        const salt = await bcrypt.genSalt(10);
+        const hashPassword = await bcrypt.hash(password, salt);
         // creating a new object of user
-        const toBeUpdate = {};
-        if (name) { toBeUpdate.name = name }
-        if (mobile) { toBeUpdate.mobile = mobile }
-        if (gender) { toBeUpdate.gender = gender }
-        if (password) {
-            const salt = await bcrypt.genSalt(10);
-            const hashPassword = await bcrypt.hash(password, salt);
-            { toBeUpdate.password = hashPassword }
-        }
-
-
+        const toBeUpdate = {
+            "name":name,
+            "mobile":mobile,
+            "gender":gender,
+            "password":hashPassword
+        };
+                                      
         let userId = req.userUniqueKey;
         const response = await User.findByIdAndUpdate(userId, { $set: toBeUpdate }, { new: true });
         res.status(200).json({ success: true, message: 'Your account updated successfully' });

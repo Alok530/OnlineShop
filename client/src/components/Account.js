@@ -1,7 +1,7 @@
 import React from 'react'
 import { NavLink, Link } from 'react-router-dom'
 import Navbar from './Navbar';
-import { useState } from 'react'
+import { useEffect } from 'react'
 import Footer from './Footer';
 import Alert from './Alert';
 import { useNavigate } from 'react-router'
@@ -13,11 +13,13 @@ const host = "https://ecommerce-reactapp-alok.herokuapp.com/api/user/regester";
 
 const Regester = () => {
     const context = useContext(ShopContext);
-    const { userInfo, alertMessage, alertShowfun, alertStatus, setalertMessage } = context;
+    const { userInfo, alertMessage, alertShowfun, alertStatus, setalertMessage,fetchUserInfo } = context;
 
     const navigate = useNavigate();        
     
-
+    useEffect(() => {
+        fetchUserInfo();
+    }, [])
     return (
         <>
             <Navbar />
