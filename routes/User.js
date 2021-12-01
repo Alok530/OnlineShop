@@ -7,7 +7,6 @@ const dotenv = require('dotenv');
 dotenv.config({path:'../dotenv'});
 const jwt_secretekey = process.env.SECRETEKEY; 
 
-// const jwt_secretekey = 'iamagoodboyiamsecondyearstudentatiiitkalyani.ac.inwestbengal'; 
 const fetchuser = require('../middleware/fetchuser');
 
 const User = require('../models/User');
@@ -34,7 +33,7 @@ router.post('/login', async (req, res) => {
             const jwtoken = jwt.sign(data,jwt_secretekey);    
 
             console.log(`${req.body.mobile} is login successfully`);
-            res.status(200).json({ "success": success, "message": `You are login successfully`,jwtoken });
+            res.status(200).json({"success": success, "message": `You are login successfully`,jwtoken });
         } else {
             console.log('invalid password');
             res.status(400).send({ "success": !success, "message": 'Invalid login credentials' });
@@ -52,13 +51,15 @@ router.post('/regester', async (req, res) => {
         if (findUser) {
             return res.status(400).json({ "success": !success, "message": 'Sorry this mobile number is already registered' });
         }
-
+        
+        console.log('enter huaa register me');
         const salt = await bcrypt.genSalt(10);
         const hashPassword = await bcrypt.hash(req.body.password,salt);
 
         const user = await User.create({
             name: req.body.name,
             mobile: req.body.mobile,
+            gender: req.body.gender,
             password: hashPassword,
         })
         
@@ -69,8 +70,7 @@ router.post('/regester', async (req, res) => {
         }
         const jwtoken = jwt.sign(data,jwt_secretekey);    
 
-        console.log(`${req.body.mobile} register successfully`);
-        res.status(200).json({ "success": success, "message": 'You are registered successfully',jwtoken });
+        res.status(200).json({"user":req.body.gender, "success": success, "message": 'You are registered successfully',jwtoken });
     } catch (error) {
         console.log(error);
         res.status(500).send({ "success": !success, "error": 'Some error occur', "err": error });
@@ -92,13 +92,13 @@ router.post('/getuser', fetchuser ,async (req, res) => {
 },
 );
 
+// feedback
 router.post('/feedback', async (req,res) =>{
     try {
         const respons = await feedback.create({
             name:req.body.name,
             message:req.body.message,
         });
-        console.log('feedback submitted',respons);
         if(respons)
         res.status(200).json({success:true,message:'Thanks for your valuable feedback'});
     } catch (error) {

@@ -37,8 +37,7 @@ export default function Login() {
             },
             body: JSON.stringify({ mobile: User.mobile, password: User.password })
         });
-        const json = await response.json();
-        console.log(json);
+        const json = await response.json();        
         if (json.success) {
             setalertMessage(json.message);
             alertShowfun();

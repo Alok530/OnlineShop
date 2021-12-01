@@ -20,6 +20,7 @@ const Regester = () => {
         name: '',
         mobile: '',
         password: '',
+        gender: '',
     })
 
     const Onchangefun = (event) => {
@@ -36,10 +37,10 @@ const Regester = () => {
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ name: User.name, mobile: User.mobile, password: User.password })
+            body: JSON.stringify({ name: User.name, mobile: User.mobile, password: User.password, gender: User.gender })
         });
         const json = await response.json();
-        console.log(json);
+        
         if (json.success) {
 
             // storing jwtoken into localstroage
@@ -48,7 +49,6 @@ const Regester = () => {
             setalertMessage(json.message);
             alertShowfun();
 
-            console.log('congratulation register ho gya');
             setTimeout(() => {
                 navigate('/gallery');
             }, 1500);
@@ -56,7 +56,6 @@ const Regester = () => {
             setalertMessage(json.message);
             alertShowfun();
             setUser({ "name": '', "mobile": '', "password": '' });
-            console.log('register nhi huaa');
         }
     }
 
@@ -78,6 +77,10 @@ const Regester = () => {
                         <div className="col-md-12">
                             <span className="Details">Phone</span>
                             <input onChange={Onchangefun} value={User.mobile} type="tel" pattern="[0-9]{10}" className="form-control" minLength="10" maxLength="10" placeholder="Enter Your Phone Number" name="mobile" autoComplete="off" required="true" />
+                        </div>
+                        <div className="col-md-12">
+                            <span className="Details">Gender</span>
+                            <input onChange={Onchangefun} value={User.gender} type="text" className="form-control"  placeholder="Enter Your Gender" name="gender" autoComplete="off" required="true" />
                         </div>
                         <div className="col-md-12">
                             <span className="Details">Password</span>

@@ -8,10 +8,10 @@ const User = require('../models/Cart');
 router.post('/fetchAllItems', fetchuser, async (req, res) => {
     try {
         const items = await User.find({ user: req.userUniqueKey });
-        console.log(items, req.body.ID);
+        // console.log(items, req.body.ID);
         res.status(200).json(items);
     } catch (error) {
-        console.log('getallitems ka error', error);
+        // console.log('getallitems ka error', error);
         res.status(400).send('Some internal error hai');
     }
 })
@@ -37,8 +37,8 @@ router.post('/addToCart', fetchuser, async (req, res) => {
             res.status(200).json({ "success": success, "message": 'Item added to cart successfully', "items": req.body.ID });
         }
     } catch (error) {
-        console.log('enter into add to cart error');
-        console.log(error);
+        // console.log('enter into add to cart error');
+        // console.log(error);
         res.status(500).send({ "success": !success, "error": 'Some error occur', "err": error });
     }
 },
@@ -57,7 +57,7 @@ router.delete('/removeItemfun', fetchuser, async (req, res) => {
         }
     }
     catch (error) {
-        console.log(error);
+        // console.log(error);
         res.status(500).send({ "message": 'Some error occur', "error": error });
     }
 })
@@ -70,7 +70,7 @@ router.delete('/removeAllitems', fetchuser, async (req, res) => {
         res.status(200).json({ "message": "All items deleted", 'removedItems': removedItems });
     }
     catch (error) {
-        console.log(error);
+        // console.log(error);
         res.status(500).send({ "message": 'Some error occur', "error": error });
     }
 })

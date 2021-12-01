@@ -16,7 +16,7 @@ router.post('/order', async (req, res) => {
             items: req.body.items,
         })               
 
-        console.log(`${user} order successfully`);
+        // console.log(`${user} order successfully`);
         res.status(200).json({ "success": success, "message": 'Congratulations your Order placed successfully',"details":user });
     } catch (error) {
         console.log(error);

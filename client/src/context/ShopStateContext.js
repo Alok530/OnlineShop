@@ -9,6 +9,23 @@ const ShopStateContext = (props) => {
     const [alertMessage, setalertMessage] = useState('');
     const [items, setitems] = useState([])
     const [total, settotal] = useState(0)    
+    const [userInfo, setuserInfo] = useState({
+        name:'',
+        mobile:'',
+        password:'',
+        gender:'',
+    })
+    const fetchUserInfo=async()=>{
+        let url = `${host}/api/cart/fetchUser`
+        const response = await fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'auth-token': localStorage.getItem('jwtoken'),
+            },
+        });
+        const json = await response.json();
+    }
 
     const alertShowfun = () => {
         setalertStatus(1);

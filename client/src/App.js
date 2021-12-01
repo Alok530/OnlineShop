@@ -25,7 +25,7 @@ const App = () => {
           <Route path='/error' element={<Error first={'401-Unauthorized'} second={'Authorization Required-Access is allowed only for registered users'} />} />
           <Route path='/payment' element={<Payment />} />
           <Route path='/order' element={<Order />} />
-          <Route path='/afterOrder' element={<PlacedOrder />} />
+          <Route path='/afterOrder' element={<PlacedOrder />} />          
           <Route path='*' element={<Error first={'404-PAGE NOT FOUND'} second={'Page not found error you are trying to access page which is not exist.'} />} />
         </Routes>
       </ShopStateContext>
