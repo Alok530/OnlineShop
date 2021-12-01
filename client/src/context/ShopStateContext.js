@@ -57,6 +57,7 @@ const ShopStateContext = (props) => {
         } else {
             setalertMessage(json.message);
             alertShowfun();
+            window.alert('update nhi huaa');
         }
     }
 

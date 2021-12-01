@@ -120,7 +120,7 @@ router.put('/updateAccount', fetchuser, async (req, res) => {
         if (password) {
             const salt = await bcrypt.genSalt(10);
             const hashPassword = await bcrypt.hash(password, salt);
-            { toBeUpdate.password = password }
+            { toBeUpdate.password = hashPassword }
         }
 
 
