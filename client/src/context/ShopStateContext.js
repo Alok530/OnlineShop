@@ -8,14 +8,15 @@ const ShopStateContext = (props) => {
     const [alertStatus, setalertStatus] = useState(0)
     const [alertMessage, setalertMessage] = useState('');
     const [items, setitems] = useState([])
-    const [total, settotal] = useState(0)    
+    const [total, settotal] = useState(0)
     const [userInfo, setuserInfo] = useState({
-        name:'',
-        mobile:'',
-        password:'******',
-        gender:'',
+        name: '',
+        mobile: '',
+        password: '******',
+        gender: '',
     })
-    const fetchUserInfo = async () =>{
+
+    const fetchUserInfo = async () => {
         let url = `${host}/api/user/fetchUser`
         const response = await fetch(url, {
             method: 'POST',
@@ -27,10 +28,36 @@ const ShopStateContext = (props) => {
         const json = await response.json();
         setuserInfo({
             name: json.name,
-            mobile: json.mobile,            
+            mobile: json.mobile,
             gender: json.gender,
-            password:"*******",
+            password: "*******",
         })
+    }
+
+    const updateuserInfo = async (event) => {
+        event.preventDefault();
+        let url = `${host}/api/user/updateAccount`;
+        const response = await fetch(url, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                'auth-token': localStorage.getItem('token')
+            },
+            body: JSON.stringify({ name: userInfo.name, mobile: userInfo.mobile, password: userInfo.password, gender: userInfo.gender })
+        });
+        const json = await response.json();
+
+        if (json.success) {            
+            fetchUserInfo();
+            setalertMessage(json.message);
+            alertShowfun();
+            setTimeout(() => {
+                navigate('/account');
+            }, 1500);
+        } else {
+            setalertMessage(json.message);
+            alertShowfun();
+        }
     }
 
     const alertShowfun = () => {
@@ -88,14 +115,14 @@ const ShopStateContext = (props) => {
         });
         const json = await response.json();
         console.log(json);
-        
+
         // for user site or frontend        
-        setitems([]);        
+        setitems([]);
         settotal(0);
     }
 
     return (
-        <ShopContext.Provider value={{fetchUserInfo,userInfo,setuserInfo,removeAllitemsfun,settotal,total,items, setitems, alertStatus,setalertStatus,alertMessage,setalertMessage, alertShowfun, logoutfun,getAllitems }}>
+        <ShopContext.Provider value={{ updateuserInfo,fetchUserInfo, userInfo, setuserInfo, removeAllitemsfun, settotal, total, items, setitems, alertStatus, setalertStatus, alertMessage, setalertMessage, alertShowfun, logoutfun, getAllitems }}>
             {props.children}
         </ShopContext.Provider>
     )

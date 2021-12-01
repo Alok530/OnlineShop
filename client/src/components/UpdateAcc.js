@@ -11,7 +11,7 @@ import ScrollBtn from './ScrollBtn';
 
 const UpdateAcc = () => {
     const context = useContext(ShopContext);
-    const { alertStatus,alertMessage,fetchUserInfo,userInfo,setuserInfo } = context;
+    const { alertStatus,alertMessage,userInfo,setuserInfo,updateuserInfo} = context;
 
     
     const Onchangefun = (event) => {
@@ -30,7 +30,7 @@ const UpdateAcc = () => {
             {localStorage.getItem('jwtoken') ? <div className="Reg">
                 <div className=" p-4 mt-4 mb-4 regestration Login">
                     <div className="Title">Update</div>
-                    <form className="row g-3">
+                    <form onSubmit={()=>{updateuserInfo()}} className="row g-3">
                         <div className="col-md-12">
                             <span className="Details">Username</span>
                             <input onChange={Onchangefun} value={userInfo.name} type="text" className="form-control" minLength="3" maxLength="16" name="name" autoComplete="off" required="true" />
