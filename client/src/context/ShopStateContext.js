@@ -29,6 +29,7 @@ const ShopStateContext = (props) => {
             name: json.name,
             mobile: json.mobile,            
             gender: json.gender,
+            password:"*******",
         })
     }
 
