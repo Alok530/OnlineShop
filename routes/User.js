@@ -79,10 +79,9 @@ router.post('/regester', async (req, res) => {
 );
 
 // Router 3 
-router.post('/getuser', fetchuser ,async (req, res) => {                
+router.post('/fetchUser', fetchuser ,async (req, res) => {                
     try {
         let userId = req.userUniqueKey;
-        console.log('userId hai ye',userId);
         const user = await User.findById(userId).select("-password");            
         res.status(200).send(user);
     } catch (error) {

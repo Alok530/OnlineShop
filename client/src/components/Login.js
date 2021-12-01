@@ -14,7 +14,7 @@ const host = "https://ecommerce-reactapp-alok.herokuapp.com";
 
 export default function Login() {
     const context = useContext(ShopContext); // for using useContext states and functions 
-    const { alertStatus, alertShowfun, alertMessage,setalertMessage } = context; // importing alertStatus (state) and alertShowfun (useContext function)
+    const { alertStatus, alertShowfun, alertMessage,setalertMessage, fetchUserInfo } = context; // importing alertStatus (state) and alertShowfun (useContext function)
 
     const navigate = useNavigate();
     const [User, setUser] = useState({
@@ -44,8 +44,9 @@ export default function Login() {
 
             // storing jwtoken into localstroage
             localStorage.setItem('jwtoken', json.jwtoken);
+            // for set userInfo in contex
+            fetchUserInfo();
 
-            console.log('congratulation login ho gya');
             setTimeout(() => {
                 navigate('/gallery');
             }, 1500);
@@ -54,7 +55,6 @@ export default function Login() {
 
             alertShowfun();
             setUser({ "mobile": '', "password": '' });
-            console.log('login nhi huaa');
         }
     }
 

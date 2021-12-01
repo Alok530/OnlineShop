@@ -21,6 +21,7 @@ export default function Navbar() {
                             <li className="nav-item">
                                 <Link className="btn hhh btn-info mx-2" to="/gallery" role="button">Shop</Link>
                                 <Link className="btn hhh btn-warning mx-2" to="/addToCart" role="button">Cart</Link>
+                                {localStorage.getItem('jwtoken')?<Link className="btn hhh btn-info mx-2" to="/account" role="button">Account</Link>:''}
                                 {localStorage.getItem('jwtoken')?<button onClick={logoutfun} className="btn hhh btn-danger mx-2"  role="button">Logout</button>:<Link className="btn btn-danger mx-2 hhh" to="/login" role="button">Login</Link>}
                             </li>
                         </ul>

@@ -35,7 +35,6 @@ const AddToCart = () => {
             body: JSON.stringify({ ID: ID })
         });
         const json = await response.json();
-        console.log(json);
 
         // for set alert-signal
         setalertSignal(1);

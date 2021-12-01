@@ -13,7 +13,7 @@ const host = "https://ecommerce-reactapp-alok.herokuapp.com/api/user/regester";
 
 const Regester = () => {
     const context = useContext(ShopContext);
-    const {alertMessage,setalertMessage,alertStatus,alertShowfun} = context;
+    const {alertMessage,setalertMessage,alertStatus,alertShowfun,fetchUserInfo} = context;
 
     const navigate = useNavigate();
     const [User, setUser] = useState({
@@ -45,6 +45,8 @@ const Regester = () => {
 
             // storing jwtoken into localstroage
             localStorage.setItem('jwtoken', json.jwtoken);
+            // for set userInfo in contex
+            fetchUserInfo();
 
             setalertMessage(json.message);
             alertShowfun();
@@ -78,13 +80,13 @@ const Regester = () => {
                             <span className="Details">Phone</span>
                             <input onChange={Onchangefun} value={User.mobile} type="tel" pattern="[0-9]{10}" className="form-control" minLength="10" maxLength="10" placeholder="Enter Your Phone Number" name="mobile" autoComplete="off" required="true" />
                         </div>
-                        <div className="col-md-12">
+                        <div className="col-md-6">
                             <span className="Details">Gender</span>
-                            <input onChange={Onchangefun} value={User.gender} type="text" className="form-control"  placeholder="Enter Your Gender" name="gender" autoComplete="off" required="true" />
+                            <input onChange={Onchangefun} value={User.gender} type="text" className="form-control"  placeholder="Gender" name="gender" autoComplete="off" required="true" />
                         </div>
-                        <div className="col-md-12">
+                        <div className="col-md-6">
                             <span className="Details">Password</span>
-                            <input onChange={Onchangefun} value={User.password} type="password" className="form-control" minLength="4" maxLength="8"  name="password" id="inputPassword4" placeholder="Enter Your Password" autoComplete="off" required="true" />
+                            <input onChange={Onchangefun} value={User.password} type="password" className="form-control" minLength="4" maxLength="8"  name="password" id="inputPassword4" placeholder="Password" autoComplete="off" required="true" />
                         </div>
                         <div className="col-12">
                             <button type="submit" name="signup" value="regester" className="btn">Register</button>

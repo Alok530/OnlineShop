@@ -12,11 +12,11 @@ const ShopStateContext = (props) => {
     const [userInfo, setuserInfo] = useState({
         name:'',
         mobile:'',
-        password:'',
+        password:'******',
         gender:'',
     })
-    const fetchUserInfo=async()=>{
-        let url = `${host}/api/cart/fetchUser`
+    const fetchUserInfo = async () =>{
+        let url = `${host}/api/user/fetchUser`
         const response = await fetch(url, {
             method: 'POST',
             headers: {
@@ -25,6 +25,11 @@ const ShopStateContext = (props) => {
             },
         });
         const json = await response.json();
+        setuserInfo({
+            name: json.name,
+            mobile: json.mobile,            
+            gender: json.gender,
+        })
     }
 
     const alertShowfun = () => {
@@ -89,7 +94,7 @@ const ShopStateContext = (props) => {
     }
 
     return (
-        <ShopContext.Provider value={{removeAllitemsfun,settotal,total,items, setitems, alertStatus,setalertStatus,alertMessage,setalertMessage, alertShowfun, logoutfun,getAllitems }}>
+        <ShopContext.Provider value={{fetchUserInfo,userInfo,setuserInfo,removeAllitemsfun,settotal,total,items, setitems, alertStatus,setalertStatus,alertMessage,setalertMessage, alertShowfun, logoutfun,getAllitems }}>
             {props.children}
         </ShopContext.Provider>
     )

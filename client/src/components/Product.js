@@ -26,7 +26,6 @@ export default function Product(props) {
                     body: JSON.stringify({ ID: ID, name: name, image: image, ratting: ratting, price: price })
                 });
                 const json = await response.json();
-                console.log(`ye mila hai alok`, json);
                 
                 setalertMessage(json.message);
 
