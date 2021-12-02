@@ -25,7 +25,6 @@ const Regester = () => {
     })
 
     const Onchangefun = (event) => {
-        console.log(event.target.value);
         if (event.target.name !== 'password')
             event.target.value = event.target.value.toUpperCase();
         setUser({ ...User, [event.target.name]: event.target.value })        
