@@ -68,16 +68,23 @@
   font-weight: 600;
   font-size: 20px;
 }
-.regestration input {
+.regestration input,select {
   height: 45px;
   outline: none;
   border-radius: 5px;
-  border: 1px solid rgb(66, 66, 66);
+  border: 1px solid rgb(66, 66, 66);  
   padding-left: 15px;
   font-size: 16px;
   margin-top: 5px;
 }
+.regestration select{
+  border: 1px solid rgb(66, 66, 66);  
+}
 .regestration input:focus {
+  border: 2px solid #9b59b6;
+  box-shadow: none;
+}
+.regestration select:focus {
   border: 2px solid #9b59b6;
   box-shadow: none;
 }

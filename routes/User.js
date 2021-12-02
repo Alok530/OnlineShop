@@ -20,8 +20,7 @@ router.post('/login', async (req, res) => {
         if (!fetchUser) {
             return res.status(400).json({ "success": !success, "message": 'You are not registered' });
         }
-
-        console.log(fetchUser);
+        
         const result = await bcrypt.compare(req.body.password, fetchUser.password);
 
         if (result) {
@@ -31,15 +30,13 @@ router.post('/login', async (req, res) => {
                 }
             }
             const jwtoken = jwt.sign(data, jwt_secretekey);
-
-            console.log(`${req.body.mobile} is login successfully`);
-            res.status(200).json({ "success": success, "message": `You are login successfully`, jwtoken });
-        } else {
-            console.log('invalid password');
-            res.status(400).send({ "success": !success, "message": 'Invalid login credentials' });
+            
+            return res.status(200).json({ "success": success, "message": `You are login successfully`, jwtoken });
+        } else {            
+            return res.status(400).send({ "success": !success, "message": 'Invalid login credentials' });
         }
     } catch (error) {
-        res.status(400).send({ "success": !success, "message": 'Some internal error hai' });
+        return res.status(400).send({ "success": !success, "message": 'Some internal error hai' });
     }
 })
 
@@ -51,8 +48,6 @@ router.post('/regester', async (req, res) => {
         if (findUser) {
             return res.status(400).json({ "success": !success, "message": 'Sorry this mobile number is already registered' });
         }
-
-        console.log('enter huaa register me');
         const salt = await bcrypt.genSalt(10);
         const hashPassword = await bcrypt.hash(req.body.password, salt);
 
@@ -70,10 +65,9 @@ router.post('/regester', async (req, res) => {
         }
         const jwtoken = jwt.sign(data, jwt_secretekey);
 
-        res.status(200).json({ "user": req.body.gender, "success": success, "message": 'You are registered successfully', jwtoken });
+        return res.status(200).json({ "success": success, "message": 'You are registered successfully', jwtoken });
     } catch (error) {
-        console.log(error);
-        res.status(500).send({ "success": !success, "error": 'Some error occur', "err": error });
+        return res.status(500).send({ "success": !success, "message": 'Server error occur', "err": error });
     }
 },
 );
@@ -85,8 +79,7 @@ router.post('/fetchUser', fetchuser, async (req, res) => {
         const user = await User.findById(userId).select("-password");
         res.status(200).send(user);
     } catch (error) {
-        console.log(error);
-        res.status(500).send('Some error occur');
+        return res.status(500).send({'success':false,'message':"Some error occur"});
     }
 },
 );
@@ -108,26 +101,28 @@ router.post('/feedback', async (req, res) => {
 
 // Update account
 router.put('/updateAccount', fetchuser, async (req, res) => {
+    console.log('backend call for update');
     try {
-
-        const { name, mobile, gender, password } = req.body;
-        const salt = await bcrypt.genSalt(10);
-        const hashPassword = await bcrypt.hash(password, salt);
+        let userId = req.userUniqueKey;
+        const { name, mobile, gender } = req.body;
+        
+        const cheakMobNoexist = await User.findOne({mobile:mobile});
+        if(cheakMobNoexist  && cheakMobNoexist._id != userId)        
+        {
+            return res.status(400).json({ success: false, message: 'Mobile number is already registered, Try other'});
+        }        
+        
         // creating a new object of user
         const toBeUpdate = {
             "name":name,
             "mobile":mobile,
             "gender":gender,
-            "password":hashPassword
         };
-                                      
-        let userId = req.userUniqueKey;
         const response = await User.findByIdAndUpdate(userId, { $set: toBeUpdate }, { new: true });
         res.status(200).json({ success: true, message: 'Your account updated successfully' });
     }
     catch (error) {
-        console.log(error);
-        res.status(500).send({ success: false, message: 'Some internal error occur' });
+        res.status(500).json({ success: false, message: 'Some internal error occur' });
     }
 })
 

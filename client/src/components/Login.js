@@ -11,6 +11,7 @@ import ShopContext from '../context/ShopContext'   // importing context file
 
 
 const host = "https://ecommerce-reactapp-alok.herokuapp.com";
+// const host = "http://localhost:5000";
 
 export default function Login() {
     const context = useContext(ShopContext); // for using useContext states and functions 
@@ -81,7 +82,7 @@ export default function Login() {
                             <button type="submit" className="btn">Sign In</button>
                         </div>
                     </form>
-                    <div class="row">
+                    <div className="row">
                         <NavLink to="/regester" className="links col">Create an Account</NavLink>
                         <NavLink to="/gallery" className="links col-2">Skip</NavLink>
                     </div>

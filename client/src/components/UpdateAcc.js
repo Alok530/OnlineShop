@@ -1,5 +1,5 @@
 import React from 'react'
-import { NavLink, Link } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 import Navbar from './Navbar'
 import Footer from './Footer';
 import Alert from './Alert';
@@ -7,13 +7,14 @@ import { useEffect,useState } from 'react';
 import { useContext } from 'react';
 import ShopContext from '../context/ShopContext';
 import ScrollBtn from './ScrollBtn';
-
+import Error from './Error';
 
 const UpdateAcc = () => {
     const context = useContext(ShopContext);
-    const { alertStatus,alertMessage,userInfo,setuserInfo,updateuserInfo} = context;
+    const { alertStatus,alertMessage,userInfo,updateuserInfo} = context;
 
-    const [user, setuser] = useState({name:'',mobile:'',gender:'',password:''});
+    const [user, setuser] = useState({name:'',mobile:''});
+    const [gender, setgender] = useState('Male')
     
     const Onchangefun = (event) => {
         if (event.target.name !== 'password')
@@ -22,13 +23,13 @@ const UpdateAcc = () => {
     }
 
     const onsubmitfun=(event)=>{
-        event.preventDefault();
-        setuserInfo(user);
-        updateuserInfo();        
+        event.preventDefault();        
+        updateuserInfo(user.name,user.mobile,gender);        
     }
 
     useEffect(() => {
-        setuser(userInfo);
+        setuser({name:userInfo.name,mobile:userInfo.mobile,password:userInfo.password});
+        setgender(userInfo.gender);
     }, [])    
    
     return (
@@ -44,32 +45,31 @@ const UpdateAcc = () => {
                     <form onSubmit={onsubmitfun} className="row g-3">
                         <div className="col-md-12">
                             <span className="Details">Username</span>
-                            <input onChange={Onchangefun} value={user.name} type="text" className="form-control" minLength="3" maxLength="16" name="name" autoComplete="off" required="true" />
+                            <input onChange={Onchangefun} value={user.name} type="text" className="form-control" minLength="3" maxLength="22" name="name" autoComplete="off" required="true" />
                         </div>
                         <div className="col-md-12">
                             <span className="Details">Phone</span>
                             <input onChange={Onchangefun} value={user.mobile} type="tel" pattern="[0-9]{10}" className="form-control" minLength="10" maxLength="10" placeholder="Enter Your Phone Number" name="mobile" autoComplete="off" required="true" />
                         </div>
-                        <div className="col-md-6">
+                        <div className="col-md-12">
                             <span className="Details">Gender</span>
-                            <input onChange={Onchangefun} value={user.gender} type="text" className="form-control" placeholder="Enter Your Gender" name="gender" autoComplete="off" required="true" />
-                        </div>
-                        <div className="col-md-6">
-                            <span className="Details">Password</span>
-                            <input onChange={Onchangefun} value={user.password} type="password" className="form-control" minLength="4" maxLength="8" name="password" id="inputPassword4" placeholder="Enter Your Password" autoComplete="off" required="true" />
-                        </div>
+                            <select onChange={(e)=>{const temp = e.target.value;
+                                setgender(temp)}} value={gender} className="form-select" required="true" name="gender">                                                                
+                                <option required="true">Choose Gender</option>
+                                <option required="true" value="Male">Male</option>
+                                <option value="Female">Female</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>                        
                         <div className="col-12">
                             <button type="submit" name="signup" value="regester" className="btn">Update</button>
                         </div>
                     </form>
-                    <div class="row">
+                    <div className="row">
                         <NavLink to="/account" className="links col">Skip</NavLink>
                     </div>
                 </div>
-            </div> : <div className="Reg" style={{ height: '50vh' }}>
-                <h1 style={{ color: 'white', fontWeight: 'bolder', padding: '12px' }}>You are already login</h1>
-                <br /><Link to="/gallery"><button className="BTN">Shop Now</button></Link>
-            </div>}
+            </div> : <Error first={'401-Unauthorized'} second={'Authorization Required-Access is allowed only for registered users'} />}
             <Footer />
         </>
     )

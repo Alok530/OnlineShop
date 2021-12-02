@@ -17,21 +17,26 @@ const ShopStateContext = (props) => {
     })
 
     const fetchUserInfo = async () => {
-        let url = `${host}/api/user/fetchUser`
-        const response = await fetch(url, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'auth-token': localStorage.getItem('jwtoken'),
-            },
-        });
-        const json = await response.json();
-        setuserInfo({
-            name: json.name,
-            mobile: json.mobile,
-            gender: json.gender,
-            password: "*******",
-        })
+        if (localStorage.getItem('jwtoken')) {
+            let url = `${host}/api/user/fetchUser`
+            const response = await fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'auth-token': localStorage.getItem('jwtoken'),
+                },
+            });
+            const json = await response.json();
+            setuserInfo({
+                name: json.name,
+                mobile: json.mobile,
+                gender: json.gender,
+                password: "*******",
+            })
+        } else{
+            alertShowfun();
+            setalertMessage('You are not login');
+        }
     }
 
     const updateuserInfo = async (event) => {
@@ -47,7 +52,7 @@ const ShopStateContext = (props) => {
         });
         const json = await response.json();
 
-        if (json.success) {            
+        if (json.success) {
             fetchUserInfo();
             setalertMessage(json.message);
             alertShowfun();
@@ -123,7 +128,7 @@ const ShopStateContext = (props) => {
     }
 
     return (
-        <ShopContext.Provider value={{ updateuserInfo,fetchUserInfo, userInfo, setuserInfo, removeAllitemsfun, settotal, total, items, setitems, alertStatus, setalertStatus, alertMessage, setalertMessage, alertShowfun, logoutfun, getAllitems }}>
+        <ShopContext.Provider value={{ updateuserInfo, fetchUserInfo, userInfo, setuserInfo, removeAllitemsfun, settotal, total, items, setitems, alertStatus, setalertStatus, alertMessage, setalertMessage, alertShowfun, logoutfun, getAllitems }}>
             {props.children}
         </ShopContext.Provider>
     )
