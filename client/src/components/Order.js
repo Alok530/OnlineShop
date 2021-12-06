@@ -40,6 +40,7 @@ const Regester = () => {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
+                'auth-token': localStorage.getItem('jwtoken'),
             },
             body: JSON.stringify({ name: User.name, mobile: User.mobile, pincode: User.pincode, state: User.state, address: User.address,items:items })
         });
