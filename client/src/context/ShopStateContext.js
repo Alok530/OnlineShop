@@ -10,6 +10,7 @@ const ShopStateContext = (props) => {
     const [alertMessage, setalertMessage] = useState('');
     const [items, setitems] = useState([])
     const [total, settotal] = useState(0)
+    const [orderHistory, setorderHistory] = useState([])
     const [userInfo, setuserInfo] = useState({
         name: '',
         mobile: '',
@@ -71,7 +72,7 @@ const ShopStateContext = (props) => {
             }
         } else {
             setalertMessage('You are not login');
-            alertShowfun();            
+            alertShowfun();
         }
     }
 
@@ -107,7 +108,7 @@ const ShopStateContext = (props) => {
                 settotal(p);
             }
         } catch (error) {
-            console.log('getAllitems function error', error);
+            console.log('Some internal error occur');
         }
     }
 
@@ -129,8 +130,31 @@ const ShopStateContext = (props) => {
         settotal(0);
     }
 
+    // fetch all order history of user
+    const fetchUserOrderhistory = async () => {
+        try {
+            if (!localStorage.getItem('jwtoken'))
+                navigate('/error');
+            else {
+                let url = `${host}/api/placeorder/fetchallorder`;
+                const response = await fetch(url, {
+                    method:'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'auth-token': localStorage.getItem('jwtoken'),
+                    },
+                })
+                if (response.success)
+                setorderHistory(response.myorder);
+            }
+        } catch (error) {
+            console.log("Server problem");
+        }
+    }
+
+
     return (
-        <ShopContext.Provider value={{ updateuserInfo, fetchUserInfo, userInfo, setuserInfo, removeAllitemsfun, settotal, total, items, setitems, alertStatus, setalertStatus, alertMessage, setalertMessage, alertShowfun, logoutfun, getAllitems }}>
+        <ShopContext.Provider value={{fetchUserOrderhistory,setorderHistory,orderHistory,updateuserInfo, fetchUserInfo, userInfo, setuserInfo, removeAllitemsfun, settotal, total, items, setitems, alertStatus, setalertStatus, alertMessage, setalertMessage, alertShowfun, logoutfun, getAllitems }}>
             {props.children}
         </ShopContext.Provider>
     )

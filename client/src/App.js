@@ -12,6 +12,7 @@ import Payment from "./components/Payment";
 import Order from "./components/Order";
 import PlacedOrder from './components/PlacedOrder';
 import Account from './components/Account';
+import OrderHistory from './components/OrderHistory';
 import UpdateAcc from './components/UpdateAcc';
 
 const App = () => {
@@ -30,6 +31,7 @@ const App = () => {
           <Route path='/afterOrder' element={<PlacedOrder />} />          
           <Route path='/account' element={<Account />} />          
           <Route path='/updateAcc' element={<UpdateAcc />} />          
+          <Route path='/myorder' element={<OrderHistory />} />          
           <Route path='*' element={<Error first={'404-PAGE NOT FOUND'} second={'Page not found error you are trying to access page which is not exist.'} />} />
         </Routes>
       </ShopStateContext>
