@@ -30,9 +30,10 @@ router.post('/order',fetchuser, async (req, res) => {
 
 
 // Router 2
-router.get('/fetchallorder', fetchuser ,async (req, res) => {
+router.post('/fetchallorder', fetchuser ,async (req, res) => {
     try {               
         const MyAllorder = await order.find({user: req.userUniqueKey})
+        console.log(MyAllorder);
         res.status(200).json({ "success": true, "message": 'Your orders',"myorder":MyAllorder });
     } catch (error) {
         console.log(error);
