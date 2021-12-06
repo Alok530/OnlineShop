@@ -146,7 +146,7 @@ const ShopStateContext = (props) => {
                 })
                 if (response.success)
                 setorderHistory(response.myorder);
-                console.log('on fetching all order history',response);
+                console.log('on fetching all order history',response.myorder);
             }
         } catch (error) {
             console.log("Server problem");
