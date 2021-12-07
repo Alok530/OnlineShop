@@ -24,7 +24,7 @@ const AddToCart = () => {
                 <button className="temp">My Orders</button>
 
                 {orderHistory == 0 ? <div className="row my-4 py-3 mx-auto" style={{ textAlign: 'center', color: 'white' }}>
-                    <h1>Your order history is empty!</h1>
+                    <h1>This page is under construction!</h1>
                     <Link to="/gallery"><button className="BTN">Shop now</button></Link>
                 </div> : ''}
 

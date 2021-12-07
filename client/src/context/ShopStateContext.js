@@ -136,7 +136,7 @@ const ShopStateContext = (props) => {
             if (!localStorage.getItem('jwtoken'))
                 navigate('/error');
             else {
-                let url = `${host}/api/placeorder/fetchallorder`;
+                let url = "localhost:5000/api/placeorder/fetchallorder";
                 const response = await fetch(url, {
                     method:'POST',
                     headers: {
@@ -146,9 +146,9 @@ const ShopStateContext = (props) => {
                 })
                 if (response.success)
                 setorderHistory(response.myorder);
-                console.log('on fetching all order history',response.myorder);
             }
         } catch (error) {
+            console.log(error);
             console.log("Server problem");
         }
     }
