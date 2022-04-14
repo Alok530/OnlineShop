@@ -63,7 +63,7 @@ export default function Login() {
 
     return (
         <>
-            <Navbarfront />
+            <Navbarfront /> 
             <ScrollBtn />
             {alertStatus ? <div style={{ 'height': '60px', 'position': 'sticky', 'top': '0', 'zIndex': '2' }}>
                 <Alert alertMessage={alertMessage} alertType='danger' />

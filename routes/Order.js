@@ -29,15 +29,15 @@ router.post('/order',fetchuser, async (req, res) => {
 );
 
 
-// Router 2
+// Router 2 :- fetch all user's order
 router.post('/fetchallorder', fetchuser ,async (req, res) => {
     try {               
         const MyAllorder = await order.find({user: req.userUniqueKey})
         console.log(MyAllorder);
-        res.status(200).json({ "success": true, "message": 'Your orders',"myorder":MyAllorder });
+        res.status(200).json({"orders":MyAllorder });
     } catch (error) {
         console.log(error);
-        res.status(500).send({ "success": !success, "message": 'Some error occur', "error": error });
+        res.status(500).send({"error": error });
     }
 },
 );
