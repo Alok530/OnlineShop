@@ -34,10 +34,10 @@ router.post('/fetchallorder', fetchuser ,async (req, res) => {
     try {               
         const MyAllorder = await order.find({user: req.userUniqueKey})
         console.log(MyAllorder);
-        res.status(200).json({"orders":MyAllorder });
+        res.status(200).json(MyAllorder);
     } catch (error) {
         console.log(error);
-        res.status(500).send({"error": error });
+        res.status(500).send(error);
     }
 },
 );
