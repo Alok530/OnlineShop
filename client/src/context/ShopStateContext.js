@@ -145,8 +145,16 @@ const ShopStateContext = (props) => {
                     },
                 })
                 const json = await response.json();
-                console.log(json);
-                setorderHistory(json);
+                let temp = [];
+                for(let i=0;i<json.length;i++)
+                {
+                    const len = (json[i].items).length;
+                    for(let j=0;j<len;j++)
+                    {
+                        temp.push(json[i].items[j]);
+                    }
+                }
+                setorderHistory(temp);
             }
         } catch (error) {
             console.log(error);

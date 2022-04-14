@@ -2,13 +2,13 @@ import React from 'react'
 import { useState } from 'react';
 
 export default function ScrollBtn() {
-    const [scrollmessage, setscrollmessage] = useState(<i class="bi bi-arrow-down"></i>);
+    const [scrollmessage, setscrollmessage] = useState(<i className="bi bi-arrow-down"></i>);
 
     function scrollFunction() {
         if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-            setscrollmessage(<i class="bi bi-arrow-up"></i>);
+            setscrollmessage(<i className="bi bi-arrow-up"></i>);
         } else {
-            setscrollmessage(<i class="bi bi-arrow-down"></i>);
+            setscrollmessage(<i className="bi bi-arrow-down"></i>);
         }
     }
 
