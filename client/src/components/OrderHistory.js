@@ -24,8 +24,8 @@ const AddToCart = () => {
             <div className="container pb-4 my-4 text-center">
                 <button className="temp">My Orders</button>
 
-                {orderHistory == 0 ? <div className="row my-4 py-3 mx-auto" style={{ textAlign: 'center', color: 'white' }}>
-                    <h1>This page is under construction!</h1>
+                {orderHistory == '' ? <div className="row my-4 py-3 mx-auto" style={{ textAlign: 'center', color: 'white' }}>
+                    <h1>You have not buy any item!</h1>
                     <Link to="/gallery"><button className="BTN">Shop now</button></Link>
                 </div> :
                     <div className="container">
