@@ -146,7 +146,7 @@ const ShopStateContext = (props) => {
                 })
                 const json = await response.json();
                 console.log(json);
-                // setorderHistory(json.orders);
+                setorderHistory(json);
             }
         } catch (error) {
             console.log(error);
